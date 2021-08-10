@@ -1,27 +1,41 @@
 <header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <a class="navbar-brand" [routerLink]="['/']">travelo_auth</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end" [ngClass]="{ show: isExpanded }">
-                <ul class="navbar-nav flex-grow">
-                    <li class="nav-item" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }">
-                        <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-                    </li>
-                    <li class="nav-item" [routerLinkActive]="['link-active']">
-                        <a class="nav-link text-dark" [routerLink]="['/counter']">Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-        </ul>
-        <app-login-menu></app-login-menu>
-      </div>
-    </div>
-  </nav>
+    <nav>
+        <div class="container-fluid zeropadding">
+            <div class="row nav">
+                <div class="col-lg-2 col-sm-2 mainLink zeropadding">
+                    <img width="30px" height="30px" src="assets/globe.png" alt="">
+                    <a class="traveloLink" href="#">Travelo</a>
+                </div>
+                <div class="col-lg-4 offset-lg-2">
+                    <div class="pages">
+                        <a href="#" style="font-weight: 600;">Home</a>
+                        <a href="#">About</a>
+                        <a href="#">Places</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Blog</a>
+                    </div>
+                </div>
+                <app-login-menu></app-login-menu>
+                <div class="col-lg-3 offset-lg-1" *ngIf="isAuthenticated | async">
+
+                </div>
+                <div class="col-lg-1 offset-lg-3" *ngIf="!(isAuthenticated | async)">
+                    <button [routerLink]='["/authentication/register"]' class="connectButton">Connect</button>
+
+                </div>
+
+                <div class="dropDown col-sm-2 zeropadding">
+                    <img class="dropDownButton" alt="Dropdown button" src="https://img.icons8.com/material-outlined/32/000000/menu--v3.png" />
+                    <div class="dropDown-content">
+                        <a href="#" style="font-weight: 600;">Home</a>
+                        <a href="#">About</a>
+                        <a href="#">Places</a>
+                        <a href="#">Careers</a>
+                        <a href="#">Blog</a>
+                        <a href="#" style="color: #4468E2; font-weight: bold;">Connect</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 </header>
