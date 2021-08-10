@@ -1,0 +1,93 @@
+.box {
+    background-color: rgba(241, 250, 255, 0.34);
+    padding: 5%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    align-items: center;
+}
+
+.box h2 {
+    margin: 40px 0 100px 0;
+    font-weight: bold;
+    text-align: center;
+}
+
+.links {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding: 20px 0 10px 0;
+}
+
+.links a {
+    color: #163235;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 0 5% 10px 5%;
+    text-decoration: none;
+    border-bottom: 2px solid lightgray;
+    text-align: center;
+    cursor: pointer;
+}
+
+.activeLink {
+    border-bottom: 5px solid #163235 !important;
+}
+
+.destinations {
+    padding: 40px 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.destinations img {
+    display: block;
+    max-width: 18rem;
+    max-height: 18rem;
+    width: auto;
+    height: auto;
+}
+
+.destinations p {
+    display: block;
+    max-width: 18rem;
+    max-height: 5rem;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+}
+
+.destinations p:hover {
+    max-height: 18rem;
+    overflow: unset;
+}
+
+#distance {
+    display: inline;
+}
+
+#price {
+    display: inline;
+    font-weight: 600;
+    float: right;
+    text-align: right;
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+#duration {
+    text-align: right;
+    font-weight: 200;
+    font-size: 12px;
+    padding: 10px;
+    margin: 0;
+    overflow: unset;
+}
+
+.tripcard {
+    padding: 30px 25px;
+}

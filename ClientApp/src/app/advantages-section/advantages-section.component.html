@@ -1,0 +1,7 @@
+<div class="d-flex flex-column flex-sm-column flex-md-column flex-lg-row justify-content-between advantages">
+    <div *ngFor="let advantageCard of advantageCards" class="advantagebox">
+        <img src="{{advantageCard.imagePath}}" alt="">
+        <p>{{advantageCard.name}}</p>
+        <span>{{advantageCard.description}}</span>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="box">
+    <h2>Recommended Destinations</h2>
+    <div class="links w-75">
+        <a *ngFor="let link of links" (click)="changeRecommendations(link)" [ngClass]="{'activeLink': link.Name === activeLink.Name }">{{link.DisplayName}}</a>
+    </div>
+    <div class="destinations">
+        <div class="tripcard" *ngFor="let trip of trips$ | async">
+            <img src="{{trip.imagePath}}" alt="">
+            <h5>{{trip.name}}</h5>
+            <p>{{trip.description}}</p>
+            <p id="distance">{{trip.distance}} km</p>
+            <p id="price">{{trip.price}} Ft</p>
+            <p id="duration">Approx. {{trip.duration}} night trip</p>
+        </div>
+    </div>
+</div>
