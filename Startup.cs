@@ -1,12 +1,8 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
-using travelo_auth.Data;
 using travelo_auth.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +27,9 @@ namespace travelo_auth
                 Configuration.GetConnectionString("TraveloDatabaseConnection")
             ));
             services.AddScoped<ITripRepository, SqlTripRepository>();
+
+            // Dto mapping
+            services.AddAutoMapper(System.AppDomain.CurrentDomain.GetAssemblies());
 
 
             services.AddDatabaseDeveloperPageExceptionFilter();
