@@ -1,0 +1,15 @@
+ul {
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+li {
+    padding-left: 1rem;
+}
+
+.connectButton {
+    border-radius: 5px;
+    font-weight: 500;
+    background-color: rgba(68, 104, 226, 0.9);
+    color: white;
+}

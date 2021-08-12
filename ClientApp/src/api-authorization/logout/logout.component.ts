@@ -42,6 +42,11 @@ export class LogoutComponent implements OnInit {
       default:
         throw new Error(`Invalid action '${action}'`);
     }
+
+    setTimeout(() => {
+      this.router.navigateByUrl('/#')
+    }, 1000);
+
   }
 
   private async logout(returnUrl: string): Promise<void> {
