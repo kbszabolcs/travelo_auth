@@ -7,12 +7,15 @@ using travelo_auth.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace travelo_auth
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(
+            IConfiguration configuration)
         {
             Configuration = configuration;
         }
@@ -31,11 +34,12 @@ namespace travelo_auth
             // Dto mapping
             services.AddAutoMapper(System.AppDomain.CurrentDomain.GetAssemblies());
 
-
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<TripDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>(options => 
+                options.SignIn.RequireConfirmedAccount = true)
+                    .AddRoles<IdentityRole>()
+                    .AddEntityFrameworkStores<TripDbContext>();
 
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, TripDbContext>();
@@ -49,10 +53,11 @@ namespace travelo_auth
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             if (env.IsDevelopment())
             {
@@ -86,6 +91,9 @@ namespace travelo_auth
                 endpoints.MapRazorPages();
             });
 
+            // Add roles to Identity
+            Task.Run(()=>CreateRolesandUsers(userManager, roleManager)).Wait();
+
             app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
@@ -99,5 +107,44 @@ namespace travelo_auth
                 }
             });
         }
+
+        private async Task CreateRolesandUsers(UserManager<ApplicationUser> _userManager, RoleManager<IdentityRole> _roleManager)
+        {
+            bool x = await _roleManager.RoleExistsAsync("Admin");
+            if (!x)
+            {
+                // first we create Admin rool    
+                var role = new IdentityRole();
+                role.Name = "Admin";
+                await _roleManager.CreateAsync(role);
+
+                //Here we create a Admin super user who will maintain the website                   
+
+                var user = new ApplicationUser();
+                user.UserName = "admin";
+                user.Email = "admin@admin.com";
+
+                string userPWD = "$Adminpassword123";
+
+                IdentityResult chkUser = await _userManager.CreateAsync(user, userPWD);
+                
+
+                //Add default User to Role Admin    
+                if (chkUser.Succeeded)
+                {
+                    var result1 = await _userManager.AddToRoleAsync(user, "Admin");
+                }
+            }
+
+            // creating Creating  role     
+            x = await _roleManager.RoleExistsAsync("Customer");
+            if (!x)
+            {
+                var role = new IdentityRole();
+                role.Name = "Customer";
+                await _roleManager.CreateAsync(role);
+            }
+        }
+
     }
 }
