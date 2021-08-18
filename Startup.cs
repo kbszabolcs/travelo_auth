@@ -44,10 +44,12 @@ namespace travelo_auth
                     .AddEntityFrameworkStores<TripDbContext>();
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, TripDbContext>();
+                .AddApiAuthorization<ApplicationUser, TripDbContext>()
+                .AddJwtBearerClientAuthentication();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
             // In production, the Angular files will be served from this directory
@@ -85,6 +87,7 @@ namespace travelo_auth
             app.UseAuthentication();
             app.UseIdentityServer();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

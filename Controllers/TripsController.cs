@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace travelo_auth.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Route("api/trips")]
     [ApiController]
     public class TripsController : ControllerBase
