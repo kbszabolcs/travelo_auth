@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace travelo_auth
 {
@@ -37,8 +38,9 @@ namespace travelo_auth
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<ApplicationUser>(options => 
-                options.SignIn.RequireConfirmedAccount = true)
+                options.SignIn.RequireConfirmedAccount = false)
                     .AddRoles<IdentityRole>()
+                    .AddSignInManager<SignInManager<ApplicationUser>>()
                     .AddEntityFrameworkStores<TripDbContext>();
 
             services.AddIdentityServer()
@@ -133,6 +135,8 @@ namespace travelo_auth
                 if (chkUser.Succeeded)
                 {
                     var result1 = await _userManager.AddToRoleAsync(user, "Admin");
+                    var adminClaim = new Claim("Role", "Admin");
+                    await _userManager.AddClaimAsync(user, adminClaim);
                 }
             }
 
