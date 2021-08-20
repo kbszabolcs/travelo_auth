@@ -10,6 +10,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using App.Services;
+using IdentityServer4.Models;
+using IdentityModel;
 
 namespace travelo_auth
 {
@@ -41,11 +46,39 @@ namespace travelo_auth
                 options.SignIn.RequireConfirmedAccount = false)
                     .AddRoles<IdentityRole>()
                     .AddSignInManager<SignInManager<ApplicationUser>>()
-                    .AddEntityFrameworkStores<TripDbContext>();
+                    .AddClaimsPrincipalFactory<ClaimsFactory<ApplicationUser>>()
+                    .AddEntityFrameworkStores<TripDbContext>()
+                    .AddDefaultTokenProviders();
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, TripDbContext>()
-                .AddJwtBearerClientAuthentication();
+                .AddApiAuthorization<ApplicationUser, TripDbContext>(
+                    o =>
+                    {
+                        /* var identityResourceClaim = new IdentityServer4.EntityFramework.Entities.IdentityResourceClaim();
+                        identityResourceClaim.Type = IdentityModel.JwtClaimTypes.Role;
+
+                        o.IdentityResources.Add(
+                            new IdentityResource
+                            {
+                                Name = "roles",
+                                DisplayName = "Roles",
+                                UserClaims = { JwtClaimTypes.Role }
+                            }
+                        ); */
+                        
+                        
+                        /* o.ApiResources.Add(
+                            new ApiResource(
+                                "Local Api",
+                                "Local Api",
+                                new[] { JwtClaimTypes.Role }
+                            )
+                        ); */
+                    }
+                )
+                .AddJwtBearerClientAuthentication()
+                .AddIdentityResources()
+                .AddApiResources();
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
