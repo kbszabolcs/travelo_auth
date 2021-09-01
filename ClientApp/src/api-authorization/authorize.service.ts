@@ -40,7 +40,7 @@ export class AuthorizeService {
   // By default pop ups are disabled because they don't work properly on Edge.
   // If you want to enable pop up authentication simply set this flag to false.
 
-  private popUpDisabled = false;
+  private popUpDisabled = true;
   private userManager: UserManager;
   private userSubject: BehaviorSubject<IUser | null> = new BehaviorSubject(null);
 
@@ -75,6 +75,9 @@ export class AuthorizeService {
     try {
       user = await this.userManager.signinSilent(this.createArguments());
       this.userSubject.next(user.profile);
+
+      console.log(user);
+
       return this.success(state);
     } catch (silentError) {
       // User might not be authenticated, fallback to popup authentication
@@ -182,7 +185,12 @@ export class AuthorizeService {
     const settings: any = await response.json();
     settings.automaticSilentRenew = true;
     settings.includeIdTokenInSilentRenew = true;
+
+    settings.UpdateAccessTokenClaimsOnRefresh = true;
+    //settings.scope += " roles";
+
     this.userManager = new UserManager(settings);
+    console.log(settings);
 
     this.userManager.events.addUserSignedOut(async () => {
       await this.userManager.removeUser();

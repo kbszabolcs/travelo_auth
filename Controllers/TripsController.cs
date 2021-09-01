@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace travelo_auth.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Policy = "AdminPolicy")]
     [Route("api/trips")]
     [ApiController]
     public class TripsController : ControllerBase

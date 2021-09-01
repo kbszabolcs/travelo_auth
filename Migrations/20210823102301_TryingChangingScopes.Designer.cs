@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace travelo_auth.Migrations
 {
     [DbContext(typeof(TripDbContext))]
-    [Migration("20210818115849_RolesAndUsers2")]
-    partial class RolesAndUsers2
+    [Migration("20210823102301_TryingChangingScopes")]
+    partial class TryingChangingScopes
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

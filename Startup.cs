@@ -15,6 +15,9 @@ using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using App.Services;
 using IdentityServer4.Models;
 using IdentityModel;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 
 namespace travelo_auth
 {
@@ -42,7 +45,7 @@ namespace travelo_auth
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<ApplicationUser>(options => 
+            services.AddDefaultIdentity<ApplicationUser>(options =>
                 options.SignIn.RequireConfirmedAccount = false)
                     .AddRoles<IdentityRole>()
                     .AddSignInManager<SignInManager<ApplicationUser>>()
@@ -54,34 +57,66 @@ namespace travelo_auth
                 .AddApiAuthorization<ApplicationUser, TripDbContext>(
                     o =>
                     {
-                        /* var identityResourceClaim = new IdentityServer4.EntityFramework.Entities.IdentityResourceClaim();
-                        identityResourceClaim.Type = IdentityModel.JwtClaimTypes.Role;
-
                         o.IdentityResources.Add(
-                            new IdentityResource
-                            {
-                                Name = "roles",
-                                DisplayName = "Roles",
-                                UserClaims = { JwtClaimTypes.Role }
-                            }
-                        ); */
-                        
-                        
-                        /* o.ApiResources.Add(
-                            new ApiResource(
-                                "Local Api",
-                                "Local Api",
-                                new[] { JwtClaimTypes.Role }
-                            )
-                        ); */
+                             new IdentityResource
+                             {
+                                 Name = "Roles",
+                                 UserClaims = { JwtClaimTypes.Role }
+                             }
+                         );
+
+                        var frontendClient = o.Clients["travelo_auth"];
+                        frontendClient.AllowedScopes.Add("Roles");
+                        frontendClient.UpdateAccessTokenClaimsOnRefresh = true;
+                        frontendClient.AlwaysIncludeUserClaimsInIdToken = true;
+                        frontendClient.AlwaysSendClientClaims = true;
+
+                        var protectedAdminAPI = o.ApiResources["travelo_authAPI"];
+                        protectedAdminAPI.UserClaims.Add(JwtClaimTypes.Role);
                     }
                 )
-                .AddJwtBearerClientAuthentication()
-                .AddIdentityResources()
-                .AddApiResources();
+                .AddJwtBearerClientAuthentication();
+
+            services.AddAuthorization(o =>
+            {
+                o.AddPolicy(
+                    "AdminPolicy",
+                    policy => policy.RequireAssertion(
+                        context =>
+                            context.User.HasClaim(
+                                "http://schemas.microsoft.com/ws/2008/06/identity/claims/role",
+                                "Admin"
+                            )
+                        )
+                    );
+            });
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+
+            services.Configure<JwtBearerOptions>(
+            IdentityServerJwtConstants.IdentityServerJwtBearerScheme,
+            options =>
+            {
+                var validationParameters = options.TokenValidationParameters;
+
+                var onTokenValidated = options.Events.OnTokenValidated;
+
+
+                options.Events.OnTokenValidated = async context =>
+                {
+                    await onTokenValidated(context);
+                    var jwtToken = (JwtSecurityToken)context.SecurityToken;
+                    var adminRoleClaim = jwtToken.Claims.FirstOrDefault(
+                        claim => claim.Value == "Admin"
+                    );
+                    if (adminRoleClaim != null)
+                    {
+                        var identity = (ClaimsIdentity)context.HttpContext.User.Identity;
+                        identity.AddClaim(adminRoleClaim);
+                    }
+                };
+            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -130,7 +165,7 @@ namespace travelo_auth
             });
 
             // Add roles to Identity
-            Task.Run(()=>CreateRolesandUsers(userManager, roleManager)).Wait();
+            Task.Run(() => CreateRolesandUsers(userManager, roleManager)).Wait();
 
             app.UseSpa(spa =>
             {
@@ -165,7 +200,7 @@ namespace travelo_auth
                 string userPWD = "$Adminpassword123";
 
                 IdentityResult chkUser = await _userManager.CreateAsync(user, userPWD);
-                
+
 
                 //Add default User to Role Admin    
                 if (chkUser.Succeeded)
