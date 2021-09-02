@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdvantageCard } from '../data/models/AdvantageCard';
+import { AdvantageCard } from '../../data/models/AdvantageCard';
 
 @Component({
   selector: 'app-advantages-section',

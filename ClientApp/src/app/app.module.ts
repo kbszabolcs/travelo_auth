@@ -3,41 +3,40 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ApiAuthorizationModule } from 'src/api-authorization/api-authorization.module';
-import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
-import { SearchSectionComponent } from './search-section/search-section.component';
-import { AdvantagesSectionComponent } from './advantages-section/advantages-section.component';
-import { RecommendedSectionComponent } from './recommended-section/recommended-section.component';
+import { SearchSectionComponent } from './home/search-section/search-section.component';
+import { AdvantagesSectionComponent } from './home/advantages-section/advantages-section.component';
+import { RecommendedSectionComponent } from './home/recommended-section/recommended-section.component';
 import { FooterComponent } from './footer/footer.component';
+import { AdminSectionComponent } from './admin-section/admin-section.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ImageUploadComponent } from './admin-section/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     SearchSectionComponent,
     AdvantagesSectionComponent,
     RecommendedSectionComponent,
-    FooterComponent
+    FooterComponent,
+    AdminSectionComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent, canActivate: [AuthorizeGuard] }
+      { path: 'admin', component: AdminSectionComponent, pathMatch: 'full'}
     ])
   ],
   providers: [

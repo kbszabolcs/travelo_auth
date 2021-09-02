@@ -1,0 +1,10 @@
+<form [formGroup]="myForm" (ngSubmit)="submit()">
+
+    <div *ngIf="filePath && filePath !== ''">
+        <img [src]="filePath" [alt]="myForm.value.name">
+    </div>
+
+    <input type="file" accept="image/*" (change)="imagePreview($event)" />
+
+    <button type="submit">Upload</button>
+</form>

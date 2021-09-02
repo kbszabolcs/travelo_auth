@@ -1,9 +1,8 @@
-import { templateJitUrl } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RecommendationLink } from '../data/models/RecommendationLink';
-import { Trip } from '../data/models/Trip';
-import { RecommendedService } from '../services/recommended-service';
+import { RecommendationLink } from '../../data/models/RecommendationLink';
+import { Trip } from '../../data/models/Trip';
+import { RecommendedService } from '../../services/recommended-service';
 
 @Component({
   selector: 'app-recommended-section',
@@ -49,22 +48,10 @@ export class RecommendedSectionComponent implements OnInit {
   }
 
   private changeRecommendations(link: RecommendationLink) {
-
     // Change the active recommendation headlink
     this.activeLink = this.links.find(
       l => l.Id === link.Id
     )
-
-    // Load random 3 of the destinations
-    // Imitating the bussiness logic
-    /* var tempTrips: Trip[] = []
-    tempTrips.push(
-      this.trips[Math.floor(Math.random() * this.trips.length)],
-      this.trips[Math.floor(Math.random() * this.trips.length)],
-      this.trips[Math.floor(Math.random() * this.trips.length)]
-    )
-
-    this.trips = tempTrips; */
   }
 
 }
