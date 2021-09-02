@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { AdminSectionComponent } from './admin-section/admin-section.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ImageUploadComponent } from './admin-section/image-upload/image-upload.component';
+import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { ImageUploadComponent } from './admin-section/image-upload/image-upload.
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'admin', component: AdminSectionComponent, pathMatch: 'full'}
+      { path: 'admin', component: AdminSectionComponent, pathMatch: 'full', canActivate: [AuthorizeGuard]}
     ])
   ],
   providers: [

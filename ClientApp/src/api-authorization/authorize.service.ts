@@ -48,6 +48,14 @@ export class AuthorizeService {
     return this.getUser().pipe(map(u => !!u));
   }
 
+  public async isUserAdmin(): Promise<boolean> {
+    var user = await this.userManager.getUser();
+    if (user) {
+      return (user.profile.role == "Admin");  
+    }
+    return false;
+  }
+
   public getUser(): Observable<IUser | null> {
     return concat(
       this.userSubject.pipe(take(1), filter(u => !!u)),
@@ -76,6 +84,7 @@ export class AuthorizeService {
       user = await this.userManager.signinSilent(this.createArguments());
       this.userSubject.next(user.profile);
 
+      console.log("Silent login done.");  
       console.log(user);
 
       return this.success(state);

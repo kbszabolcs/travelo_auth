@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -10,10 +10,12 @@
 
     <!-- Set this to true if you enable server-side prerendering -->
     <BuildServerSideRenderer>false</BuildServerSideRenderer>
+    <UserSecretsId>26560eb0-9e00-4f65-8b54-da24924518dc</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.8" />
@@ -58,7 +60,7 @@
     <ItemGroup>
       <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
       <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
-      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
+      <ResolvedFileToPublish Include="@(DistFiles-&gt;'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
         <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
