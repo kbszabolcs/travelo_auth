@@ -7,11 +7,14 @@ import { Trip } from "../data/models/Trip";
 export class RecommendedService {
 
     private static baseURL: string = 'https://localhost:5001/api/trips/';
-    //private recommendedTrips: Trip[] = []
 
     constructor(private http: HttpClient) { }
 
     public GetRecommendedTrips(): Observable<Trip[]> {
-        return this.http.get<Trip[]>(RecommendedService.baseURL)
+        return this.http.get<Trip[]>(
+            RecommendedService.baseURL,
+            {
+            responseType: 'json'
+        });
     }
 }

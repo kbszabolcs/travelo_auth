@@ -1,8 +1,9 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 public class Trip{
 
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     [Required]
     [MaxLength(50)]
@@ -17,6 +18,11 @@ public class Trip{
 
     [Required]
     public string ImagePath { get; set; }
+
+    [Required]
+    public Guid TripImageId { get; set; }
+
+    public TripImage TripImage { get; set; }
 
     public int Distance { get; set; }
     

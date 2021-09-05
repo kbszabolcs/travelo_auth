@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 public class TripUpdateDto{
@@ -14,6 +15,9 @@ public class TripUpdateDto{
 
     [Required]
     public string ImagePath { get; set; }
+    
+    [Required]
+    public TripImage TripImage { get; set; }
 
     public int Distance { get; set; }
     

@@ -84,8 +84,8 @@ export class AuthorizeService {
       user = await this.userManager.signinSilent(this.createArguments());
       this.userSubject.next(user.profile);
 
-      console.log("Silent login done.");  
-      console.log(user);
+      //console.log("Silent login done.");  
+      //console.log(user);
 
       return this.success(state);
     } catch (silentError) {
@@ -199,7 +199,7 @@ export class AuthorizeService {
     //settings.scope += " roles";
 
     this.userManager = new UserManager(settings);
-    console.log(settings);
+    //console.log(settings);
 
     this.userManager.events.addUserSignedOut(async () => {
       await this.userManager.removeUser();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 public interface ITripRepository{
@@ -6,7 +7,7 @@ public interface ITripRepository{
 
     IEnumerable<Trip> GetAllTrips();
     
-    Trip GetTripById(int id);
+    Trip GetTripById(Guid id);
 
     void CreateTrip(Trip trip);
 

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 public class SqlTripRepository : ITripRepository
 {
@@ -24,10 +26,12 @@ public class SqlTripRepository : ITripRepository
 
     public IEnumerable<Trip> GetAllTrips()
     {
-        return _context.Trips.ToList();
+        return _context.Trips
+                .Include(t => t.TripImage)
+                .ToList();
     }
 
-    public Trip GetTripById(int id)
+    public Trip GetTripById(Guid id)
     {
         return _context.Trips.FirstOrDefault(p => p.Id == id);
     }

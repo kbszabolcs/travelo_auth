@@ -164,7 +164,7 @@ namespace travelo_auth
                 endpoints.MapRazorPages();
             });
 
-            // Add roles to Identity
+            // Init roles, users in the database
             Task.Run(() => CreateRolesandUsers(userManager, roleManager)).Wait();
 
             app.UseSpa(spa =>
@@ -211,7 +211,7 @@ namespace travelo_auth
                 }
             }
 
-            // creating Creating  role     
+            // Creating role     
             x = await _roleManager.RoleExistsAsync("Customer");
             if (!x)
             {

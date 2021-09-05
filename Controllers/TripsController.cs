@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace travelo_auth.Controllers
 {
-    [Authorize(Policy = "AdminPolicy")]
+    //[Authorize(Policy = "AdminPolicy")]
     [Route("api/trips")]
     [ApiController]
     public class TripsController : ControllerBase
@@ -25,14 +26,13 @@ namespace travelo_auth.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Trip>> GetAllTrips()
         {
-
             var tripItems = _repository.GetAllTrips();
             var tripReadDtoItems = _mapper.Map<IEnumerable<TripReadDto>>(tripItems);
             return Ok(tripItems);
         }
 
         [HttpGet("{id}", Name = "GetTripById")]
-        public ActionResult<TripReadDto> GetTripById(int id)
+        public ActionResult<TripReadDto> GetTripById(Guid id)
         {
 
             var tripItem = _repository.GetTripById(id);
@@ -62,7 +62,7 @@ namespace travelo_auth.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult UpdateTrip(int id, TripUpdateDto tripUpdateDto)
+        public ActionResult UpdateTrip(Guid id, TripUpdateDto tripUpdateDto)
         {
 
             var tripItem = _repository.GetTripById(id);
@@ -77,7 +77,7 @@ namespace travelo_auth.Controllers
         }
 
         [HttpPatch("{id}")]
-        public ActionResult PartialTripUpdate(int id, JsonPatchDocument<TripUpdateDto> patchdocument)
+        public ActionResult PartialTripUpdate(Guid id, JsonPatchDocument<TripUpdateDto> patchdocument)
         {
 
             // Get the item we want to partially update from the repo
@@ -100,7 +100,7 @@ namespace travelo_auth.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteTrip(int id)
+        public ActionResult DeleteTrip(Guid id)
         {
 
             var tripItem = _repository.GetTripById(id);

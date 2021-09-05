@@ -37,7 +37,10 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'admin', component: AdminSectionComponent, pathMatch: 'full', canActivate: [AuthorizeGuard]}
+      {
+        path: 'admin', component: AdminSectionComponent, pathMatch: 'full',
+        //canActivate: [AuthorizeGuard]
+      }
     ])
   ],
   providers: [
