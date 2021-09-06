@@ -194,7 +194,7 @@ namespace travelo_auth
                 //Here we create a Admin super user who will maintain the website                   
 
                 var user = new ApplicationUser();
-                user.UserName = "admin";
+                user.UserName = "admin@admin.com";
                 user.Email = "admin@admin.com";
 
                 string userPWD = "$Adminpassword123";
