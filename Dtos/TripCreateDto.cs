@@ -18,7 +18,7 @@ public class TripCreateDto{
     public string ImagePath { get; set; }
 
     [Required]
-    public TripImage TripImage { get; set; }
+    public TripImage tripImage { get; set; }
     
     public int Distance { get; set; }
     

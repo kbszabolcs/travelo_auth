@@ -1,10 +1,8 @@
-<form [formGroup]="myForm" (ngSubmit)="submit()">
+<form [formGroup]="imageForm" (ngSubmit)="submit()">
 
-    <div *ngIf="filePath && filePath !== ''">
-        <img [src]="filePath" [alt]="myForm.value.name">
+    <div *ngIf="base64Image && base64Image !== '' && !formSubmitted">
+        <img [src]="base64Image" [alt]="imageForm.value.name">
     </div>
 
-    <input type="file" accept="image/*" (change)="imagePreview($event)" />
-
-    <button type="submit">Upload</button>
+    <input type="file" accept="image/png" (change)="imagePreview($event)" />
 </form>

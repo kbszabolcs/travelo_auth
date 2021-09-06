@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
 using AutoMapper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace travelo_auth.Controllers
 {
-    //[Authorize(Policy = "AdminPolicy")]
     [Route("api/trips")]
     [ApiController]
     public class TripsController : ControllerBase
@@ -41,9 +39,14 @@ namespace travelo_auth.Controllers
             return tripItem is null ? NotFound() : Ok(tripReadDtoItem);
         }
 
+        [Authorize(Policy = "AdminPolicy")]
         [HttpPost]
         public ActionResult<TripReadDto> CreateTrip(TripCreateDto tripCreateDto)
         {
+
+            //ar base64image = tripCreateDto.tripImage.Image;
+            //Convert.FromBase64String(base64image);
+            //System.Console.WriteLine("SADASDASD");
 
             var tripItem = _mapper.Map<Trip>(tripCreateDto);
             _repository.CreateTrip(tripItem);

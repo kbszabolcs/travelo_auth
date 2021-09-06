@@ -1,30 +1,33 @@
 <div class="container">
     <div class="row d-flex flex-column align-items-center justify-content-end">
-        <h3>This is the admin page, you can add here your new trip deals!</h3>
+        <h3>This is the admin page, you can add here your new trips!</h3>
+        <div *ngIf="submitted" class="alert-success">
+            <h4>Successful upload!</h4>
+        </div>
         <div class="row d-flex flex-row w-75 justify-content-around">
             <div class="w-50">
-                <form>
+                <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                     <div class="form-group">
                         <label for="tripName">Trip's name</label>
-                        <input class="form-control" id="tripName">
+                        <input type="text" class="form-control" id="tripName" name="tripName" maxlength="50" required ngModel>
                     </div>
                     <div class="form-group">
                         <label for="tripPrice">Price</label>
-                        <input class="form-control" id="tripPrice">
+                        <input type="number" class="form-control" id="tripPrice" name="tripPrice" required ngModel>
                     </div>
                     <div class="form-group">
                         <label for="tripDuration">Duration</label>
-                        <input class="form-control" id="tripDuration">
+                        <input type="number" class="form-control" id="tripDuration" name="tripDuration" required ngModel>
                     </div>
                     <div class="form-group">
                         <label for="tripDescription">Description</label>
-                        <textarea class="form-control" id="tripDescription" rows="3"></textarea>
+                        <textarea class="form-control" id="tripDescription" rows="3" name="tripDescription" required ngModel maxlength="250"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" [disabled]="!f.valid || !tripImageFile" class="btn btn-primary">Submit</button>
                 </form>
             </div>
             <div>
-                <app-image-upload></app-image-upload>
+                <app-image-upload [formSubmitted]="submitted" (uploadedImageFile)="onImageUpload($event)" (uploadedImageBase64)="onImageByteUpload($event)"></app-image-upload>
             </div>
         </div>
     </div>

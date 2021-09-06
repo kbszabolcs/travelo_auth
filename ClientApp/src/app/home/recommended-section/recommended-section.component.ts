@@ -5,7 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { TripImage } from 'src/app/data/models/TripImage';
 import { RecommendationLink } from '../../data/models/RecommendationLink';
 import { Trip } from '../../data/models/Trip';
-import { RecommendedService } from '../../services/recommended-service';
+import { TripService } from '../../services/trip-service';
 
 @Component({
   selector: 'app-recommended-section',
@@ -43,7 +43,7 @@ export class RecommendedSectionComponent implements OnInit {
     link => link.Name = "Weekend"
   )
 
-  constructor(private recommendedService: RecommendedService, private domSanitizer: DomSanitizer) {}
+  constructor(private recommendedService: TripService, private domSanitizer: DomSanitizer) {}
 
   ngOnInit() {
     // Call service for the data

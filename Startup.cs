@@ -181,7 +181,7 @@ namespace travelo_auth
             });
         }
 
-        private async Task CreateRolesandUsers(UserManager<ApplicationUser> _userManager, RoleManager<IdentityRole> _roleManager)
+        public async Task CreateRolesandUsers(UserManager<ApplicationUser> _userManager, RoleManager<IdentityRole> _roleManager)
         {
             bool x = await _roleManager.RoleExistsAsync("Admin");
             if (!x)

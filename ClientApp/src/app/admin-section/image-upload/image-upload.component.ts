@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -6,38 +6,48 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.css']
 })
-export class ImageUploadComponent implements OnInit {
+export class ImageUploadComponent {
 
-  filePath: string;
-  myForm: FormGroup;
+  base64Image: string;
+  imageForm: FormGroup;
+
+  private _formSubmitted: boolean;
+
+  @Input() set formSubmitted(submitted: boolean) {
+    if (submitted) {
+      this.imageForm.reset();
+      this.base64Image = "";
+    }
+    this._formSubmitted = submitted;
+  }
+  get formSubmitted(): boolean{
+    return this._formSubmitted;
+  }
+  @Output() uploadedImageFile = new EventEmitter<File>();
+  @Output() uploadedImageBase64 = new EventEmitter<string>();
 
   constructor(public fb: FormBuilder) {
-    this.myForm = this.fb.group({
+    this.imageForm = this.fb.group({
       img: [null],
       filename: ['']
     })
   }
 
-  ngOnInit(): void { }
-
   imagePreview(e) {
     const file = (e.target as HTMLInputElement).files[0];
 
-    this.myForm.patchValue({
+    this.imageForm.patchValue({
       img: file
     });
 
-    this.myForm.get('img').updateValueAndValidity()
+    this.imageForm.get('img').updateValueAndValidity()
 
     const reader = new FileReader();
     reader.onload = () => {
-      this.filePath = reader.result as string;
+      this.base64Image = reader.result as string;
+      this.uploadedImageFile.emit(this.imageForm.value.img)
+      this.uploadedImageBase64.emit(this.base64Image)
     }
     reader.readAsDataURL(file)
   }
-
-  submit() {
-    console.log(this.myForm.value)
-  }
-
 }
