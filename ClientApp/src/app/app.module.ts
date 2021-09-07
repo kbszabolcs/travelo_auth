@@ -16,6 +16,10 @@ import { AdminSectionComponent } from './admin-section/admin-section.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ImageUploadComponent } from './admin-section/image-upload/image-upload.component';
 import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
+import { AddTripComponent } from './admin-section/add-trip/add-trip.component';
+import { EditTripComponent } from './admin-section/edit-trip/edit-trip.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table'  
 
 @NgModule({
   declarations: [
@@ -27,12 +31,15 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
     RecommendedSectionComponent,
     FooterComponent,
     AdminSectionComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    AddTripComponent,
+    EditTripComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    MatTableModule,
     ReactiveFormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
@@ -41,7 +48,8 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
         path: 'admin', component: AdminSectionComponent, pathMatch: 'full',
         canActivate: [AuthorizeGuard]
       }
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }

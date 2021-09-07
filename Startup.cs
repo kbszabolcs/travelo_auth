@@ -34,17 +34,21 @@ namespace travelo_auth
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Database
+            // Database configuration
             services.AddDbContext<TripDbContext>(opt => opt.UseSqlServer(
                 Configuration.GetConnectionString("TraveloDatabaseConnection")
             ));
             services.AddScoped<ITripRepository, SqlTripRepository>();
 
-            // Dto mapping
+            // Dto mapping via automapper package
             services.AddAutoMapper(System.AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            // ASP.NET Core Identity:
+            // Is an API that supports user interface (UI) login functionality.
+            // Manages users, passwords, profile data, roles, claims, tokens, email confirmation, and more.
+            // DefaultIdentity: login, register, profile pages are scaffolded ...            
             services.AddDefaultIdentity<ApplicationUser>(options =>
                 options.SignIn.RequireConfirmedAccount = false)
                     .AddRoles<IdentityRole>()
@@ -53,6 +57,10 @@ namespace travelo_auth
                     .AddEntityFrameworkStores<TripDbContext>()
                     .AddDefaultTokenProviders();
 
+            // Backend API protection auth server
+            // After authentication the server generates a JWT token for authorization purposes which
+            // is later owned by the client.
+            // JWT token has manually added role claims concerning the authenticated user  
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, TripDbContext>(
                     o =>
@@ -77,6 +85,7 @@ namespace travelo_auth
                 )
                 .AddJwtBearerClientAuthentication();
 
+            // A policy which can be used to ensure that only users with the admin role have access to an API  
             services.AddAuthorization(o =>
             {
                 o.AddPolicy(
@@ -91,17 +100,17 @@ namespace travelo_auth
                     );
             });
 
+            // Configures IdentityServer to be responsible for authentication
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
+            // Configures backend to read role claims from the authorization (JWT) token and set
+            // user's claims accordingly
             services.Configure<JwtBearerOptions>(
             IdentityServerJwtConstants.IdentityServerJwtBearerScheme,
             options =>
             {
-                var validationParameters = options.TokenValidationParameters;
-
                 var onTokenValidated = options.Events.OnTokenValidated;
-
 
                 options.Events.OnTokenValidated = async context =>
                 {
@@ -183,41 +192,41 @@ namespace travelo_auth
 
         public async Task CreateRolesandUsers(UserManager<ApplicationUser> _userManager, RoleManager<IdentityRole> _roleManager)
         {
-            bool x = await _roleManager.RoleExistsAsync("Admin");
-            if (!x)
+            bool isAdminRoleExist = await _roleManager.RoleExistsAsync("Admin");
+            if (!isAdminRoleExist)
             {
                 // first we create Admin rool    
-                var role = new IdentityRole();
-                role.Name = "Admin";
-                await _roleManager.CreateAsync(role);
+                var adminRole = new IdentityRole();
+                adminRole.Name = "Admin";
+                await _roleManager.CreateAsync(adminRole);
 
                 //Here we create a Admin super user who will maintain the website                   
 
-                var user = new ApplicationUser();
-                user.UserName = "admin@admin.com";
-                user.Email = "admin@admin.com";
+                var adminUser = new ApplicationUser();
+                adminUser.UserName = "admin@admin.com";
+                adminUser.Email = "admin@admin.com";
 
-                string userPWD = "$Adminpassword123";
+                string adminUserPassword = "$Adminpassword123";
 
-                IdentityResult chkUser = await _userManager.CreateAsync(user, userPWD);
+                IdentityResult adminUserCreateResult = await _userManager.CreateAsync(adminUser, adminUserPassword);
 
 
                 //Add default User to Role Admin    
-                if (chkUser.Succeeded)
+                if (adminUserCreateResult.Succeeded)
                 {
-                    var result1 = await _userManager.AddToRoleAsync(user, "Admin");
+                    var adminUserAddToRoleResult = await _userManager.AddToRoleAsync(adminUser, "Admin");
                     var adminClaim = new Claim("Role", "Admin");
-                    await _userManager.AddClaimAsync(user, adminClaim);
+                    await _userManager.AddClaimAsync(adminUser, adminClaim);
                 }
             }
 
             // Creating role     
-            x = await _roleManager.RoleExistsAsync("Customer");
-            if (!x)
+            bool isCustomerRoleExist = await _roleManager.RoleExistsAsync("Customer");
+            if (!isCustomerRoleExist)
             {
-                var role = new IdentityRole();
-                role.Name = "Customer";
-                await _roleManager.CreateAsync(role);
+                var customerRole = new IdentityRole();
+                customerRole.Name = "Customer";
+                await _roleManager.CreateAsync(customerRole);
             }
         }
 

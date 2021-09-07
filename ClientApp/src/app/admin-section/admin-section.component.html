@@ -1,34 +1,26 @@
-<div class="container">
-    <div class="row d-flex flex-column align-items-center justify-content-end">
-        <h3>This is the admin page, you can add here your new trips!</h3>
-        <div *ngIf="submitted" class="alert-success">
-            <h4>Successful upload!</h4>
-        </div>
-        <div class="row d-flex flex-row w-75 justify-content-around">
-            <div class="w-50">
-                <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-                    <div class="form-group">
-                        <label for="tripName">Trip's name</label>
-                        <input type="text" class="form-control" id="tripName" name="tripName" maxlength="50" required ngModel>
-                    </div>
-                    <div class="form-group">
-                        <label for="tripPrice">Price</label>
-                        <input type="number" class="form-control" id="tripPrice" name="tripPrice" required ngModel>
-                    </div>
-                    <div class="form-group">
-                        <label for="tripDuration">Duration</label>
-                        <input type="number" class="form-control" id="tripDuration" name="tripDuration" required ngModel>
-                    </div>
-                    <div class="form-group">
-                        <label for="tripDescription">Description</label>
-                        <textarea class="form-control" id="tripDescription" rows="3" name="tripDescription" required ngModel maxlength="250"></textarea>
-                    </div>
-                    <button type="submit" [disabled]="!f.valid || !tripImageFile" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-            <div>
-                <app-image-upload [formSubmitted]="submitted" (uploadedImageFile)="onImageUpload($event)" (uploadedImageBase64)="onImageByteUpload($event)"></app-image-upload>
-            </div>
-        </div>
-    </div>
-</div>
+<table mat-table [dataSource]="trips$ | async" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let trip"> {{trip.Id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let trip"> {{trip.Name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let trip"> {{trip.Price}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
