@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Trip } from '../data/models/Trip';
 import { TripService } from '../services/trip-service';
@@ -8,13 +8,19 @@ import { TripService } from '../services/trip-service';
   templateUrl: './admin-section.component.html',
   styleUrls: ['./admin-section.component.css']
 })
-export class AdminSectionComponent {
+export class AdminSectionComponent implements OnInit{
 
-  private trips$: Observable<Trip[]>;
-  displayedColumns: string[] = ["Id", "Name", "Price"];
+  private _trips$: Observable<Trip[]>;
+  private trips: Trip[];
+  private _tripsService: TripService;
+  private _displayedColumns: string[] = ["Id", "Name", "Price"];
 
   constructor(private tripService: TripService) {
-    this.trips$ = tripService.GetRecommendedTrips();
+    this._tripsService = tripService;
+    this._trips$ = this._tripsService.GetRecommendedTrips();
   }
-  
+
+  ngOnInit(): void {
+    
+  }
 }
