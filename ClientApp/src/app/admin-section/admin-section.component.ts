@@ -10,14 +10,18 @@ import { TripService } from '../services/trip-service';
 })
 export class AdminSectionComponent implements OnInit{
 
-  private _trips$: Observable<Trip[]>;
-  private trips: Trip[];
-  private _tripsService: TripService;
-  private _displayedColumns: string[] = ["Id", "Name", "Price"];
+  private trips$: Observable<Trip[]>;
+  private displayedColumns: string[] = ["Id", "Name", "Price"];
+
+  private clickedTrip: Trip;
 
   constructor(private tripService: TripService) {
-    this._tripsService = tripService;
-    this._trips$ = this._tripsService.GetRecommendedTrips();
+    this.trips$ = tripService.GetRecommendedTrips();
+  }
+
+  onRowClicked(trip: Trip) {
+    console.log(trip);
+    
   }
 
   ngOnInit(): void {
