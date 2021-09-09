@@ -22,7 +22,24 @@
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row (click)="onRowClicked(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+            <tr mat-row (click)="onRowClicked(row)" data-bs-toggle="modal" data-bs-target="#choiceModal" *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
+    </div>
+</div>
+
+<!-- Modal -->
+
+<div class="modal fade" id="choiceModal" tabindex="-1" aria-labelledby="choiceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div *ngIf="clickedTrip | async" class="modal-header">
+                <h5 class="modal-title" id="choiceModalLabel">What to do with trip <span>"{{clickedTripName}}"</span> ?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex flex-row justify-content-evenly">
+                <button class="btn btn-warning">Edit</button>
+                <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+            </div>
+        </div>
     </div>
 </div>

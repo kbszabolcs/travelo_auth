@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Trip } from '../data/models/Trip';
 import { TripService } from '../services/trip-service';
 
@@ -13,18 +13,24 @@ export class AdminSectionComponent implements OnInit{
   private trips$: Observable<Trip[]>;
   private displayedColumns: string[] = ["Id", "Name", "Price"];
 
-  private clickedTrip: Trip;
+  private clickedTrip: Subject<Object> = new Subject<Object>();
+  private clickedTripName: string = "";
 
   constructor(private tripService: TripService) {
     this.trips$ = tripService.GetRecommendedTrips();
   }
 
-  onRowClicked(trip: Trip) {
-    console.log(trip);
-    
+  ngOnInit(): void {
+    this.clickedTrip.subscribe(
+      result => { this.clickedTripName = result["name"]; }
+    )
   }
 
-  ngOnInit(): void {
+  onRowClicked(trip: Trip) {
+    this.clickedTrip.next(trip);
+  }
+
+  onDelete() {
     
   }
 }

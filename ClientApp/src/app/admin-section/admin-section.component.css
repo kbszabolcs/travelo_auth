@@ -6,6 +6,16 @@ h4 {
     padding: 20px;
 }
 
+button {
+    padding: 10px 20px;
+    margin: 20px 0;
+}
+
+span {
+    color: grey;
+    font-weight: 600;
+}
+
 table {
     width: 100%;
     padding: 40px 0;
