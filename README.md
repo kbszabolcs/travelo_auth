@@ -1,6 +1,6 @@
 # Travelo
 
-Travelo is a webshop SPA, with .NET backend and Angular frontend. Customers can browse and pay for holiday trips.
+Travelo is a webshop SPA with .NET backend and Angular frontend, where customers can browse and pay for holiday trips.
 <br>
 By default the owner of the shop can modify deals via the admin user:
 <br>
@@ -21,3 +21,6 @@ dotnet ef database update
 ```
 dotnet run
 ```
+
+<br>
+Swagger documentation is available at [The swagger endpoint](https://localhost:5001/swagger/)
