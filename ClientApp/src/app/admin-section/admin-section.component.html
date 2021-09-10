@@ -1,7 +1,7 @@
 <div class="d-flex flex-column align-items-center">
     <h3>This is the admin page, where you can add/edit/delete your trips!</h3>
     <div class="w-75 adminTable">
-        <table mat-table [dataSource]="trips$ | async" class="mat-elevation-z8">
+        <table mat-table [dataSource]="trips" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -32,13 +32,13 @@
 <div class="modal fade" id="choiceModal" tabindex="-1" aria-labelledby="choiceModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div *ngIf="clickedTrip | async" class="modal-header">
-                <h5 class="modal-title" id="choiceModalLabel">What to do with trip <span>"{{clickedTripName}}"</span> ?</h5>
+            <div *ngIf="clickedTrip$ | async" class="modal-header">
+                <h5 class="modal-title" id="choiceModalLabel">What to do with trip <span>"{{clickedTrip.Name}}"</span> ?</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex flex-row justify-content-evenly">
                 <button class="btn btn-warning">Edit</button>
-                <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+                <button class="btn btn-danger" data-bs-dismiss="modal" (click)="onDelete(clickedTrip.Id)">Delete</button>
             </div>
         </div>
     </div>

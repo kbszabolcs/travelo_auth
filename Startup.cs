@@ -135,6 +135,8 @@ namespace travelo_auth
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            // Register the Swagger services
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -175,6 +177,10 @@ namespace travelo_auth
 
             // Init roles, users in the database
             Task.Run(() => CreateRolesandUsers(userManager, roleManager)).Wait();
+
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseSpa(spa =>
             {

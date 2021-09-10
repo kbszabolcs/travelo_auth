@@ -26,7 +26,9 @@ export class TripService {
         )
     }
 
-/*     public DeleteTrip(guid: string): boolean{
-        return this.http.delete
-    } */
+    public DeleteTrip(guid: string) {
+        console.log(TripService.baseURL + guid);
+        
+        return this.http.delete(TripService.baseURL + guid);
+    }
 }
