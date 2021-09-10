@@ -47,6 +47,8 @@ export class AdminSectionComponent implements OnInit{
 
   onRowClicked(trip: Trip) {
     this.clickedTrip$.next(trip);
+    console.log(trip);
+    
   }
 
   onDelete(guid: string) {

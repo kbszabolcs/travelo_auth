@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { TripImage } from 'src/app/data/models/TripImage';
+import { tap } from 'rxjs/operators';
 import { RecommendationLink } from '../../data/models/RecommendationLink';
 import { Trip } from '../../data/models/Trip';
 import { TripService } from '../../services/trip-service';
@@ -50,7 +49,7 @@ export class RecommendedSectionComponent implements OnInit {
     this.trips$ = this.recommendedService.GetRecommendedTrips().pipe(
       tap(trips => {
         for (var trip of trips) {
-          trip.ImagePath = "data:image/png;base64," + trip.tripImage.image;
+          trip.imagePath = "data:image/png;base64," + trip.tripImage.image;
         }
       }
     ));

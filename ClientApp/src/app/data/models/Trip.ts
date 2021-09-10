@@ -4,14 +4,14 @@ import { TripImage } from "./TripImage";
 export class Trip{
 
     constructor(
-        public Id: string,
-        public Name: string,
-        public Description: string,
-        public Price: number,
-        public ImagePath: SafeUrl,
-        public TripImageId: string,
+        public id: string,
+        public name: string,
+        public description: string,
+        public price: number,
+        public imagePath: SafeUrl,
+        public tripImageId: string,
         public tripImage: TripImage,
-        public Distance?: number,
-        public Duration?: number
+        public distance?: number,
+        public duration?: number
     ){}
 }

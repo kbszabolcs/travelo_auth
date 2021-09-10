@@ -3,12 +3,12 @@ import { TripImageCreateDTO } from "./TripImageCreateDTO";
 export class TripCreateDTO{
 
     constructor(
-        public Name: string,
-        public Description: string,
-        public Price: number,
-        public ImagePath: string,
+        public name: string,
+        public description: string,
+        public price: number,
+        public imagePath: string,
         public tripImage: TripImageCreateDTO,
-        public Distance?: number,
-        public Duration?: number
+        public distance?: number,
+        public duration?: number
     ){}
 }

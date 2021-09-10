@@ -5,7 +5,7 @@
     </div>
     <div class="destinations">
         <div class="tripcard" *ngFor="let trip of trips$ | async">
-            <img [src]="getSantizeUrl(trip.ImagePath)" alt="">
+            <img [src]="getSantizeUrl(trip.imagePath)" alt="">
             <h5>{{trip.name}}</h5>
             <p>{{trip.description}}</p>
             <p id="distance">{{trip.distance}} km</p>
