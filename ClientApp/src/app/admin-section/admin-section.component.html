@@ -3,7 +3,7 @@
 
     <div class="w-75 d-flex flex-row justify-content-between">
         <input type="text" [formControl]="searchFormControl" (keyup)="searchTripsByName($event)" placeholder="Search for trip name..." style="margin: 20px 0;">
-        <button class="btn btn-success">Add trip</button>
+        <button class="btn btn-success" [routerLink]='["add"]'>Add trip</button>
     </div>
 
     <div class="w-75 adminTable">

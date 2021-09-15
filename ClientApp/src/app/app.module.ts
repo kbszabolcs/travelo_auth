@@ -47,6 +47,9 @@ import { MatTableModule } from '@angular/material/table'
       {
         path: 'admin', component: AdminSectionComponent, pathMatch: 'full',
         canActivate: [AuthorizeGuard]
+      },
+      {
+        path: 'admin/add', component: AddTripComponent, pathMatch: 'full'
       }
     ]),
     BrowserAnimationsModule

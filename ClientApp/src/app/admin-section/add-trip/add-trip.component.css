@@ -1,0 +1,15 @@
+h3 {
+    margin: 50px 0;
+}
+
+button {
+    margin: 20px 20px 20px 0;
+}
+
+.successAlert {
+    margin: 30px;
+    text-align: center;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 10px;
+}
