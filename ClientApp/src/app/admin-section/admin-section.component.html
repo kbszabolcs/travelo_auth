@@ -1,11 +1,13 @@
 <div class="d-flex flex-column align-items-center">
     <h3>This is the admin page, where you can add/edit/delete your trips!</h3>
+
+    <div class="w-75 d-flex flex-row justify-content-between">
+        <input type="text" [formControl]="searchFormControl" (keyup)="searchTripsByName($event)" placeholder="Search for trip name..." style="margin: 20px 0;">
+        <button class="btn btn-success">Add trip</button>
+    </div>
+
     <div class="w-75 adminTable">
-        <table mat-table [dataSource]="trips" class="mat-elevation-z8">
-
-            <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
-
+        <table mat-table [dataSource]="filteredTrips" class="mat-elevation-z8">
             <ng-container matColumnDef="Name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
                 <td mat-cell *matCellDef="let trip"> {{trip.name}} </td>
@@ -26,8 +28,6 @@
         </table>
     </div>
 </div>
-
-<!-- Modal -->
 
 <div class="modal fade" id="choiceModal" tabindex="-1" aria-labelledby="choiceModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">

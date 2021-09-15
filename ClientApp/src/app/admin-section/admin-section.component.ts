@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { Trip } from '../data/models/Trip';
 import { TripService } from '../services/trip-service';
@@ -11,11 +12,15 @@ import { TripService } from '../services/trip-service';
 export class AdminSectionComponent implements OnInit{
 
   private trips: Subject<Trip[]> = new Subject<Trip[]>();
-  private currentTrips: Trip[];
-  private displayedColumns: string[] = ["Id", "Name", "Price"];
+  private allTrips: Trip[];
+  private filteredTrips: Trip[];
+  private displayedColumns: string[] = ["Name", "Id", "Price"];
 
-  private clickedTrip$: Subject<Object> = new Subject<Object>();
+  private clickedTrip$: Subject<Trip> = new Subject<Trip>();
   private clickedTrip: Trip;
+
+  private searchName: string = "";
+  private searchFormControl = new FormControl('', { validators:[Validators.required] });
 
   constructor(private tripService: TripService) {}
 
@@ -25,37 +30,33 @@ export class AdminSectionComponent implements OnInit{
     );
 
     this.trips.subscribe(
-      result => { this.currentTrips = result; }
+      result => {
+        this.allTrips = result;
+        this.filteredTrips = result;
+      }
     )
 
     this.clickedTrip$.subscribe(
       result => {
-        this.clickedTrip = new Trip(
-          result["id"],
-          result["name"],
-          result["description"],
-          result["price"],
-          result["imagePath"],
-          result["tripImageId"],
-          result["tripImage"],
-          result["distance"],
-          result["duration"]
-        );
+        this.clickedTrip = result;
       }
     );
   }
 
+  searchTripsByName(event: any) {
+    this.searchName = this.searchName + event.target.value;
+    this.filteredTrips = this.allTrips.filter(trip => trip.name.includes(this.searchFormControl.value));
+  }
+
   onRowClicked(trip: Trip) {
     this.clickedTrip$.next(trip);
-    console.log(trip);
-    
   }
 
   onDelete(guid: string) {
     this.tripService.DeleteTrip(guid).subscribe(
       result => {
-        this.trips.next(this.currentTrips.filter(trip => trip.id != guid));
-        
+        this.allTrips = this.allTrips.filter(trip => trip.id != guid);
+        this.filteredTrips = this.filteredTrips.filter(trip => trip.id != guid);
       },
         error => { console.log(error);
       }
