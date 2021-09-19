@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TripCreateDTO } from 'src/app/data/models/TripCreateDTO';
 import { TripImageCreateDTO } from 'src/app/data/models/TripImageCreateDTO';

@@ -19,6 +19,12 @@ export class TripService {
         });
     }
 
+    public GetTripById(id: string): Observable<Trip> {
+        return this.http.get<Trip>(
+            TripService.baseURL + id
+        );
+    }
+
     public PostTrip(trip: TripCreateDTO): Observable<TripCreateDTO>{
         return this.http.post<TripCreateDTO>(
             TripService.baseURL,

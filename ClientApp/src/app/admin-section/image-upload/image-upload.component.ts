@@ -8,8 +8,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ImageUploadComponent {
 
-  base64Image: string;
-  imageForm: FormGroup;
+  private base64Image: string;
+  private imageForm: FormGroup;
 
   private _formSubmitted: boolean;
 

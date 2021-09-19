@@ -50,6 +50,9 @@ import { MatTableModule } from '@angular/material/table'
       },
       {
         path: 'admin/add', component: AddTripComponent, pathMatch: 'full'
+      },
+      {
+        path: 'admin/edit/:id', component: EditTripComponent, pathMatch: 'full'
       }
     ]),
     BrowserAnimationsModule

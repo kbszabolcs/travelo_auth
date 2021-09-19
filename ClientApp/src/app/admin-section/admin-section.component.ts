@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Trip } from '../data/models/Trip';
 import { TripService } from '../services/trip-service';
@@ -22,7 +23,7 @@ export class AdminSectionComponent implements OnInit{
   private searchName: string = "";
   private searchFormControl = new FormControl('', { validators:[Validators.required] });
 
-  constructor(private tripService: TripService) {}
+  constructor(private tripService: TripService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.tripService.GetRecommendedTrips().subscribe(
@@ -50,6 +51,10 @@ export class AdminSectionComponent implements OnInit{
 
   onRowClicked(trip: Trip) {
     this.clickedTrip$.next(trip);
+  }
+
+  onEdit(e: Event) {
+    this.router.navigate(['/admin/edit', this.clickedTrip.id]);
   }
 
   onDelete(guid: string) {
