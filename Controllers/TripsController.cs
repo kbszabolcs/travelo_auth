@@ -43,11 +43,6 @@ namespace travelo_auth.Controllers
         [HttpPost]
         public ActionResult<TripReadDto> CreateTrip(TripCreateDto tripCreateDto)
         {
-
-            //ar base64image = tripCreateDto.tripImage.Image;
-            //Convert.FromBase64String(base64image);
-            //System.Console.WriteLine("SADASDASD");
-
             var tripItem = _mapper.Map<Trip>(tripCreateDto);
             _repository.CreateTrip(tripItem);
             _repository.SaveChanges();

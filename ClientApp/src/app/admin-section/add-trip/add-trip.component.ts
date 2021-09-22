@@ -11,6 +11,8 @@ import { TripService } from 'src/app/services/trip-service';
 })
 export class AddTripComponent {
 
+  private interval;
+
   private tripImageFile: File;
   private tripImageBase64: string;
   private submitted: boolean = false;
@@ -26,6 +28,8 @@ export class AddTripComponent {
   }
 
   onSubmit(form: NgForm) {
+    clearInterval(this.interval);
+
     var tripToUpload = new TripCreateDTO(
       form.value["tripName"],
       form.value["tripDescription"],
@@ -43,7 +47,9 @@ export class AddTripComponent {
       result => {
         form.reset();
         this.submitted = true;
-        setInterval(() => this.submitted = false, 5000);
+        this.interval = setInterval(() => {
+          this.submitted = false
+        }, 5000);
       }
     )
   }

@@ -8,6 +8,7 @@ import { Trip } from "../data/models/Trip";
 export class TripService {
 
     private static baseURL: string = 'https://localhost:5001/api/trips/';
+    public static base64Prefix: string = "data:image/png;base64,";
 
     constructor(private http: HttpClient) { }
 
@@ -30,6 +31,13 @@ export class TripService {
             TripService.baseURL,
             trip
         )
+    }
+
+    public UpdateTrip(id: string, tripUpdateDTO: TripCreateDTO) {
+        return this.http.put<TripCreateDTO>(
+            TripService.baseURL + id,
+            tripUpdateDTO
+        );
     }
 
     public DeleteTrip(guid: string) {

@@ -3,33 +3,33 @@
 
     <div class="container">
         <div class="row d-flex flex-column align-items-center justify-content-end">
-            <div *ngIf="submitted" class="w-25 alert-success successAlert">
-                <h4>Successful upload!</h4>
+            <div *ngIf="submitted" class="w-25 alert-warning successAlert">
+                <h4>Successful edit!</h4>
             </div>
-            <div class="d-flex flex-row w-75 justify-content-around">
+            <div *ngIf="!submitted" class="d-flex flex-row w-75 justify-content-around">
                 <div class="w-50">
                     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                         <div class="form-group">
                             <label for="tripName">Trip's name</label>
-                            <input value="{{(trip$ | async)?.name}}" type="text" class="form-control" id="tripName" name="tripName" maxlength="50" required ngModel>
+                            <input ngModel="{{(trip$ | async)?.name}}" type="text" class="form-control" id="tripName" name="tripName" maxlength="50" required>
                         </div>
                         <div class="form-group">
                             <label for="tripPrice">Price</label>
-                            <input value="{{(trip$ | async)?.price}}" type="number" class="form-control" id="tripPrice" name="tripPrice" required ngModel>
+                            <input ngModel="{{(trip$ | async)?.price}}" type="number" class="form-control" id="tripPrice" name="tripPrice" required max="1000000">
                         </div>
                         <div class="form-group">
                             <label for="tripDuration">Duration</label>
-                            <input value="{{(trip$ | async)?.duration}}" type="number" class="form-control" id="tripDuration" name="tripDuration" required ngModel>
+                            <input ngModel="{{(trip$ | async)?.duration}}" type="number" class="form-control" id="tripDuration" name="tripDuration" required>
                         </div>
                         <div class="form-group">
                             <label for="tripDescription">Description</label>
                             <textarea ngModel="{{(trip$ | async)?.description}}" class="form-control" id="tripDescription" rows="3" name="tripDescription" required maxlength="250"></textarea>
                         </div>
-                        <button type="submit" [disabled]="!f.valid || !tripImageFile" class="btn btn-primary">Submit</button>
+                        <button type="submit" [disabled]="!f.valid" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
                 <div>
-                    <app-image-upload [trip$]="trip$" [formSubmitted]="submitted " (uploadedImageFile)="onImageUpload($event) " (uploadedImageBase64)="onImageByteUpload($event) "></app-image-upload>
+                    <app-image-upload [trip$]="trip$" [formSubmitted]="submitted" (uploadedImageFile)="onImageUpload($event) " (uploadedImageBase64)="onImageByteUpload($event) "></app-image-upload>
                 </div>
             </div>
         </div>

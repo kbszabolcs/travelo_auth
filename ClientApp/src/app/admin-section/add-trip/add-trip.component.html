@@ -6,7 +6,7 @@
             <div *ngIf="submitted" class="w-25 alert-success successAlert">
                 <h4>Successful upload!</h4>
             </div>
-            <div class="d-flex flex-row w-75 justify-content-around">
+            <div *ngIf="!submitted" class="d-flex flex-row w-75 justify-content-around">
                 <div class="w-50">
                     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
                         <div class="form-group">
@@ -15,7 +15,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tripPrice">Price</label>
-                            <input type="number" class="form-control" id="tripPrice" name="tripPrice" required ngModel>
+                            <input type="number" class="form-control" id="tripPrice" name="tripPrice" required ngModel max="1000000">
                         </div>
                         <div class="form-group">
                             <label for="tripDuration">Duration</label>
