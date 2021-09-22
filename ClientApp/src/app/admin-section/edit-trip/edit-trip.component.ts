@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -25,6 +25,10 @@ export class EditTripComponent implements OnInit {
   ngOnInit(): void {
     var tripId = this.route.snapshot.params['id'];
     this.trip$ = this.tripService.GetTripById(tripId);
+
+    this.trip$.subscribe(
+      result => { console.log(result); }
+    );
   }
 
   onImageUpload(imageFile: File) {

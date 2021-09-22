@@ -28,17 +28,18 @@
         </table>
     </div>
 </div>
-
-<div class="modal fade" id="choiceModal" tabindex="-1" aria-labelledby="choiceModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div *ngIf="clickedTrip$ | async" class="modal-header">
-                <h5 class="modal-title" id="choiceModalLabel">What to do with trip <span>"{{clickedTrip.name}}"</span> ?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body d-flex flex-row justify-content-evenly">
-                <button class="btn btn-warning" data-bs-dismiss="modal" (click)="onEdit($event)">Edit</button>
-                <button class="btn btn-danger" data-bs-dismiss="modal" (click)="onDelete(clickedTrip.id)">Delete</button>
+<div>
+    <div class="modal fade" id="choiceModal" tabindex="-1" aria-labelledby="choiceModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div *ngIf="clickedTrip$ | async" class="modal-header">
+                    <h5 class="modal-title" id="choiceModalLabel">What to do with trip <span>"{{clickedTrip.name}}"</span> ?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex flex-row justify-content-evenly">
+                    <button class="btn btn-warning" data-bs-dismiss="modal" (click)="onEdit($event)">Edit</button>
+                    <button class="btn btn-danger" data-bs-dismiss="modal" (click)="onDelete(clickedTrip.id)">Delete</button>
+                </div>
             </div>
         </div>
     </div>

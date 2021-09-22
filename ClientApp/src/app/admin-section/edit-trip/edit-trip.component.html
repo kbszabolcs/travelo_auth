@@ -29,7 +29,7 @@
                     </form>
                 </div>
                 <div>
-                    <app-image-upload [formSubmitted]="submitted" (uploadedImageFile)="onImageUpload($event)" (uploadedImageBase64)="onImageByteUpload($event)"></app-image-upload>
+                    <app-image-upload [trip$]="trip$" [formSubmitted]="submitted " (uploadedImageFile)="onImageUpload($event) " (uploadedImageBase64)="onImageByteUpload($event) "></app-image-upload>
                 </div>
             </div>
         </div>

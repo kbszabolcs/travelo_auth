@@ -1,18 +1,20 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Trip } from 'src/app/data/models/Trip';
 
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.css']
 })
-export class ImageUploadComponent {
+export class ImageUploadComponent implements OnInit {
 
-  private base64Image: string;
   private imageForm: FormGroup;
-
-  private _formSubmitted: boolean;
-
+  private _formSubmitted: boolean = false;
+  private base64Image: string;
+  
+  @Input() trip$: Observable<Trip>;
   @Input() set formSubmitted(submitted: boolean) {
     if (submitted) {
       this.imageForm.reset();
@@ -31,6 +33,12 @@ export class ImageUploadComponent {
       img: [null],
       filename: ['']
     })
+  }
+
+  ngOnInit(): void {
+    this.trip$.subscribe(
+      result => { this.base64Image = result.tripImage.image;}
+    )
   }
 
   imagePreview(e) {

@@ -33,7 +33,9 @@ public class SqlTripRepository : ITripRepository
 
     public Trip GetTripById(Guid id)
     {
-        return _context.Trips.FirstOrDefault(p => p.Id == id);
+        return _context.Trips
+            .Include( t => t.TripImage)
+            .FirstOrDefault(p => p.Id == id);
     }
 
     public void UpdateTrip(Trip trip){}

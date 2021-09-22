@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatPaginator } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { Trip } from '../data/models/Trip';
