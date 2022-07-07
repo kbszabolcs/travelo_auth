@@ -79,7 +79,7 @@ export class EditTripComponent implements OnInit, OnDestroy {
           console.log("interval asdasd");
           
           this.submitted = false;
-          this.router.navigate(['/admin'])
+          this.router.navigate(['/admin']);
           
         }, 2000);
       }

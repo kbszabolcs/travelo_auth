@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TripCreateDTO } from 'src/app/data/models/TripCreateDTO';
 import { TripImageCreateDTO } from 'src/app/data/models/TripImageCreateDTO';
 import { TripService } from 'src/app/services/trip-service';
@@ -17,7 +18,7 @@ export class AddTripComponent {
   private tripImageBase64: string;
   private submitted: boolean = false;
 
-  constructor(private tripService: TripService) { }
+  constructor(private tripService: TripService, private router: Router) { }
 
   onImageUpload(imageFile: File) {
     this.tripImageFile = imageFile;
@@ -49,7 +50,8 @@ export class AddTripComponent {
         this.submitted = true;
         this.interval = setInterval(() => {
           this.submitted = false
-        }, 5000);
+          this.router.navigate(['/admin'])
+        }, 3000);
       }
     )
   }
