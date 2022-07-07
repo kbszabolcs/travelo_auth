@@ -45,14 +45,17 @@ import { MatTableModule } from '@angular/material/table'
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
-        path: 'admin', component: AdminSectionComponent, pathMatch: 'full',
+        path: 'admin', 
+        component: AdminSectionComponent, pathMatch: 'full',
         canActivate: [AuthorizeGuard]
       },
       {
-        path: 'admin/add', component: AddTripComponent, pathMatch: 'full'
+        path: 'admin/add', component: AddTripComponent, pathMatch: 'full',
+        canActivate: [AuthorizeGuard]
       },
       {
-        path: 'admin/edit/:id', component: EditTripComponent, pathMatch: 'full'
+        path: 'admin/edit/:id', component: EditTripComponent, pathMatch: 'full',
+        canActivate: [AuthorizeGuard]
       }
     ]),
     BrowserAnimationsModule
