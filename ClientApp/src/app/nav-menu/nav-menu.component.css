@@ -95,6 +95,9 @@
     .pages a {
         display: none;
     }
+    .login {
+        display: none;
+    }
     .connectButton {
         display: none;
     }

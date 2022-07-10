@@ -21,6 +21,7 @@ import { EditTripComponent } from './admin-section/edit-trip/edit-trip.component
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { TripDeatilsComponent } from './customer-section/trip-deatils/trip-deatils.component'  
+import { MatBadgeModule, MatButtonModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,9 @@ import { TripDeatilsComponent } from './customer-section/trip-deatils/trip-deati
     HttpClientModule,
     FormsModule,
     MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatBadgeModule,
     ReactiveFormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([

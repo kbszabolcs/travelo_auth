@@ -2,11 +2,11 @@
     <nav>
         <div class="container-fluid zeropadding">
             <div class="row nav">
-                <div class="col-lg-2 col-sm-2 mainLink zeropadding">
+                <div class="col-lg-2 mainLink zeropadding flex-shrink-1">
                     <img width="30px" height="30px" src="assets/globe.png" alt="">
                     <a class="traveloLink" href="#">Travelo</a>
                 </div>
-                <div class="col-lg-4 offset-lg-2">
+                <div class="col-lg-4 offset-lg-2 flex-shrink-1">
                     <div class="pages">
                         <a href="#" style="font-weight: 600;">Home</a>
                         <a href="#">About</a>
@@ -15,11 +15,13 @@
                         <a href="#">Blog</a>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <app-login-menu></app-login-menu>
+                <div class="col-lg-4 flex-shrink-1">
+                    <div class="login">
+                        <app-login-menu></app-login-menu>
+                    </div>
                 </div>
 
-                <div class="dropDown col-sm-2 zeropadding">
+                <div class="dropDown zeropadding flex-shrink-1">
                     <img class="dropDownButton" alt="Dropdown button" src="https://img.icons8.com/material-outlined/32/000000/menu--v3.png" />
                     <div class="dropDown-content">
                         <a href="#" style="font-weight: 600;">Home</a>
@@ -27,7 +29,7 @@
                         <a href="#">Places</a>
                         <a href="#">Careers</a>
                         <a href="#">Blog</a>
-                        <a href="#" style="color: #4468E2; font-weight: bold;">Connect</a>
+                        <a href="#" [routerLink]='["/authentication/login"]' style="color: #4468E2; font-weight: bold;">Connect</a>
                     </div>
                 </div>
             </div>
