@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { AuthorizeService } from 'src/api-authorization/authorize.service';
 import { Trip } from 'src/app/data/models/Trip';
 import { TripService } from 'src/app/services/trip-service';
 
@@ -14,9 +15,13 @@ import { TripService } from 'src/app/services/trip-service';
 export class TripDeatilsComponent implements OnInit {
 
   private $trip: Observable<Trip>;
-  //private trip: Trip;
+  private $isAuthenticated: Observable<boolean>;
 
-  constructor(private route: ActivatedRoute, private tripService: TripService, private domSanitizer: DomSanitizer) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private tripService: TripService, 
+    private domSanitizer: DomSanitizer,
+    private authService: AuthorizeService) { }
 
   ngOnInit() {
     var tripId = this.route.snapshot.params['id'];
@@ -25,6 +30,12 @@ export class TripDeatilsComponent implements OnInit {
         trip => {trip.imagePath = "data:image/png;base64," + trip.tripImage.image;}
       )
     )
+
+    this.$isAuthenticated = this.authService.isAuthenticated();
+  }
+
+  private onReservation(){
+    
   }
 
   public getSantizeUrl(url : string) {

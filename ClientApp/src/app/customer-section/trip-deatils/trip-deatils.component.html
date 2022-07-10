@@ -26,7 +26,8 @@
             </div>
             <div class="row justify-content-center align-items-center">
                 <div class="row col-6">
-                    <button type="button" class="btn btn-lg btn-success">Reserve</button>
+                    <button type="button" class="btn btn-lg btn-success" (click)="onReservation()" [disabled]="($isAuthenticated | async) == false" matTooltip="You cannot delete that">Reserve</button>
+                    <span *ngIf="($isAuthenticated | async) == false">You must be logged in order to reserve trips.</span>
                 </div>
             </div>
         </div>

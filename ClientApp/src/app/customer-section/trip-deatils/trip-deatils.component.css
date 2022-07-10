@@ -14,3 +14,7 @@ img {
     width: auto;
     height: auto;
 }
+
+span {
+    font-weight: 300;
+}
