@@ -4,14 +4,14 @@
         <h1>{{($trip | async)?.name}}</h1>
     </div>
 
-    <div class="row flex-nowrap">
-        <div class="col">
+    <div class="row">
+        <div class="col-lg">
             <div class="row">
                 <img [src]="getSantizeUrl(($trip | async)?.imagePath)">
             </div>
         </div>
 
-        <div class="col">
+        <div class="col-lg">
             <div class="row">
                 <h4>Description</h4>
                 <p>{{($trip | async)?.description}}</p>
@@ -25,7 +25,7 @@
                 <p>{{($trip | async)?.price}} HUF.</p>
             </div>
             <div class="row justify-content-center align-items-center">
-                <div class="row col-6">
+                <div class="row col-6 reservationButton">
                     <button type="button" class="btn btn-lg btn-success" (click)="onReservation()" [disabled]="($isAuthenticated | async) == false" matTooltip="You cannot delete that">Reserve</button>
                     <span *ngIf="($isAuthenticated | async) == false">You must be logged in order to reserve trips.</span>
                 </div>
