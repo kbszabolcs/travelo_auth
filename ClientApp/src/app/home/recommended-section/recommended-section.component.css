@@ -50,6 +50,7 @@
     max-height: 18rem;
     width: auto;
     height: auto;
+    cursor: pointer;
 }
 
 .destinations p {

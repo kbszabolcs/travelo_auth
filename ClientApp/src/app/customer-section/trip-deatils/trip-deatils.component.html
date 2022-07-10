@@ -1,0 +1,40 @@
+
+<div class="container">
+    <div class="row justify-content-center align-items-center">
+        <h1>{{($trip | async)?.name}}</h1>
+    </div>
+
+    <div class="row flex-nowrap">
+        <div class="col">
+            <div class="row">
+                <img [src]="getSantizeUrl(($trip | async)?.imagePath)">
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="row">
+                <h4>Description</h4>
+                <p>{{($trip | async)?.description}}</p>
+            </div>
+            <div class="row">
+                <h4>Duration</h4>
+                <p>The trip is going to take {{($trip | async)?.duration}} days to complete.</p>
+            </div>
+            <div class="row">
+                <h4>Price</h4>
+                <p>{{($trip | async)?.price}} HUF.</p>
+            </div>
+            <div class="row justify-content-center align-items-center">
+                <div class="row col-6">
+                    <button type="button" class="btn btn-lg btn-success">Reserve</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+
+</div>
+
+

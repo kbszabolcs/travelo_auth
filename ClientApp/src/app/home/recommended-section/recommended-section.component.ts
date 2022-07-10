@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { RecommendationLink } from '../../data/models/RecommendationLink';
@@ -14,6 +15,7 @@ import { TripService } from '../../services/trip-service';
 export class RecommendedSectionComponent implements OnInit {
 
   private trips$: Observable<Trip[]>
+  private trips: Trip[] = [];
 
   private links: RecommendationLink[] = [
     new RecommendationLink(
@@ -42,7 +44,7 @@ export class RecommendedSectionComponent implements OnInit {
     link => link.Name = "Weekend"
   )
 
-  constructor(private recommendedService: TripService, private domSanitizer: DomSanitizer) {}
+  constructor(private recommendedService: TripService, private router: Router, private domSanitizer: DomSanitizer) {}
 
   ngOnInit() {
     // Call service for the data
@@ -53,10 +55,20 @@ export class RecommendedSectionComponent implements OnInit {
         }
       }
     ));
+
+    this.trips$.subscribe(
+      argtrips => {
+        this.trips = argtrips;
+      }
+    )
   }
 
   public getSantizeUrl(url : string) {
     return this.domSanitizer.bypassSecurityTrustUrl(url);
+  }
+
+  private onTripImageClick(trip: Trip) {
+    this.router.navigate(['trip', trip.id]);
   }
 
   private changeRecommendations(link: RecommendationLink) {
@@ -64,6 +76,9 @@ export class RecommendedSectionComponent implements OnInit {
     this.activeLink = this.links.find(
       l => l.Id === link.Id
     )
+
+    // Replaceable logic for selecting trips of rec. headlink
+    
   }
 
 }

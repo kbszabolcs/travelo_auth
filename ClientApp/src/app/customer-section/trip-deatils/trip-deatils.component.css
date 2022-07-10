@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+    margin: 5rem;
+}
+
+button {
+    margin-top: 3rem;
+}
+
+img {
+    display: block;
+    max-width: 36rem;
+    max-height: 30rem;
+    width: auto;
+    height: auto;
+}

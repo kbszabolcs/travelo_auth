@@ -4,8 +4,8 @@
         <a *ngFor="let link of links" (click)="changeRecommendations(link)" [ngClass]="{'activeLink': link.Name === activeLink.Name }">{{link.DisplayName}}</a>
     </div>
     <div class="destinations">
-        <div class="tripcard" *ngFor="let trip of trips$ | async">
-            <img [src]="getSantizeUrl(trip.imagePath)" alt="">
+        <div class="tripcard" *ngFor="let trip of trips">
+            <img [src]="getSantizeUrl(trip.imagePath)" alt="" (click)="onTripImageClick(trip)">
             <h5>{{trip.name}}</h5>
             <p>{{trip.description}}</p>
             <p id="distance">{{trip.distance}} km</p>

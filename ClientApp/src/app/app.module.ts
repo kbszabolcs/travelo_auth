@@ -19,7 +19,8 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AddTripComponent } from './admin-section/add-trip/add-trip.component';
 import { EditTripComponent } from './admin-section/edit-trip/edit-trip.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table'  
+import { MatTableModule } from '@angular/material/table';
+import { TripDeatilsComponent } from './customer-section/trip-deatils/trip-deatils.component'  
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MatTableModule } from '@angular/material/table'
     AdminSectionComponent,
     ImageUploadComponent,
     AddTripComponent,
-    EditTripComponent
+    EditTripComponent,
+    TripDeatilsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -56,6 +58,10 @@ import { MatTableModule } from '@angular/material/table'
       {
         path: 'admin/edit/:id', component: EditTripComponent, pathMatch: 'full',
         canActivate: [AuthorizeGuard]
+      },
+      {
+        path: 'trip/:id',
+        component: TripDeatilsComponent, pathMatch: 'full'
       }
     ]),
     BrowserAnimationsModule
