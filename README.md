@@ -24,3 +24,9 @@ dotnet run
 
 <br>
 Swagger documentation is available at [The swagger endpoint](https://localhost:5001/swagger/)
+
+
+Backend architecture
+
+![image](https://user-images.githubusercontent.com/47303182/179362613-7a4e4b43-507f-423c-a28a-8c27443cc0fa.png)
+
