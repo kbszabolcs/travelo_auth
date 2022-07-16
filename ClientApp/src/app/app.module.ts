@@ -22,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { TripDetailsComponent } from './customer-section/trip-deatils/trip-details.component'  
 import { MatBadgeModule, MatButtonModule, MatIconModule } from '@angular/material';
+import { CustomerBasketComponent } from './customer-section/customer-basket/customer-basket.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatBadgeModule, MatButtonModule, MatIconModule } from '@angular/materia
     ImageUploadComponent,
     AddTripComponent,
     EditTripComponent,
-    TripDetailsComponent
+    TripDetailsComponent,
+    CustomerBasketComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
