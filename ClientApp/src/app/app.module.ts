@@ -20,7 +20,7 @@ import { AddTripComponent } from './admin-section/add-trip/add-trip.component';
 import { EditTripComponent } from './admin-section/edit-trip/edit-trip.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
-import { TripDeatilsComponent } from './customer-section/trip-deatils/trip-deatils.component'  
+import { TripDetailsComponent } from './customer-section/trip-deatils/trip-details.component'  
 import { MatBadgeModule, MatButtonModule, MatIconModule } from '@angular/material';
 
 @NgModule({
@@ -36,7 +36,7 @@ import { MatBadgeModule, MatButtonModule, MatIconModule } from '@angular/materia
     ImageUploadComponent,
     AddTripComponent,
     EditTripComponent,
-    TripDeatilsComponent
+    TripDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -65,7 +65,7 @@ import { MatBadgeModule, MatButtonModule, MatIconModule } from '@angular/materia
       },
       {
         path: 'trip/:id',
-        component: TripDeatilsComponent, pathMatch: 'full'
+        component: TripDetailsComponent, pathMatch: 'full'
       }
     ]),
     BrowserAnimationsModule

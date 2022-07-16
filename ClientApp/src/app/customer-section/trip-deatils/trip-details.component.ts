@@ -8,11 +8,11 @@ import { Trip } from 'src/app/data/models/Trip';
 import { TripService } from 'src/app/services/trip-service';
 
 @Component({
-  selector: 'app-trip-deatils',
-  templateUrl: './trip-deatils.component.html',
-  styleUrls: ['./trip-deatils.component.css']
+  selector: 'app-trip-details',
+  templateUrl: './trip-details.component.html',
+  styleUrls: ['./trip-details.component.css']
 })
-export class TripDeatilsComponent implements OnInit {
+export class TripDetailsComponent implements OnInit {
 
   private $trip: Observable<Trip>;
   private $isAuthenticated: Observable<boolean>;
