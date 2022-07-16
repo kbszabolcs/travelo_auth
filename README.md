@@ -38,4 +38,11 @@ Swagger documentation is available at [The swagger endpoint](https://localhost:5
 <br>
 
 
+### Technology
+
+- Repository pattern
+- DTOs (Automapper)
+- .Net Identity
+- JWT based auth (OpenIdConnect)
+- Database seed
 
