@@ -39,6 +39,7 @@ namespace travelo_auth
                 Configuration.GetConnectionString("TraveloDatabaseConnection")
             ));
             services.AddScoped<ITripRepository, SqlTripRepository>();
+            services.AddScoped<IOrderRepository, SqlOrderRepository>();
 
             // Dto mapping via automapper package
             services.AddAutoMapper(System.AppDomain.CurrentDomain.GetAssemblies());

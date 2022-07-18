@@ -14,5 +14,9 @@ public class TripsProfile : Profile {
         CreateMap<TripUpdateDto, Trip>()
             .ReverseMap();
 
+
+        // Order -> OrderReadDto
+        //CreateMap<Order, OrderCreateDto>();
+
     }
 }

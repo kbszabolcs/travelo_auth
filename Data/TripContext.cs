@@ -21,4 +21,6 @@ public class TripDbContext : ApiAuthorizationDbContext<ApplicationUser>
     
     public DbSet<TripImage> TripImages { get; set; }
 
+    public DbSet<Order> Orders { get; set; }
+
 }
