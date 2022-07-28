@@ -1,5 +1,5 @@
-<div class="basketFab">
-    <button mat-fab color="primary" matBadge="2" matBadgeColor="warn" matBadgeSize="large"> 
+<div *ngIf="" class="basketFab">
+    <button (click)="onClick()" mat-fab color="primary" matBadge="2" matBadgeColor="warn" matBadgeSize="large"> 
       <mat-icon>shopping_basket</mat-icon>
     </button>
 </div>    

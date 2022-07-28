@@ -56,6 +56,14 @@ export class AuthorizeService {
     return false;
   }
 
+  public async getUserGuid(): Promise<string | null> {
+    var user = await this.userManager.getUser();
+    if(user && user.profile){
+      return user.profile.sub;
+    }
+    return null;
+  }
+
   public getUser(): Observable<IUser | null> {
     return concat(
       this.userSubject.pipe(take(1), filter(u => !!u)),
