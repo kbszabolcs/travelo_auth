@@ -29,12 +29,13 @@ public class UsersController : ControllerBase
 
 /*     [HttpGet("{userGuid}")]
     public ActionResult<ApplicationUser> GetUserById(Guid userGuid){
-        var user = await _userManager.FindByIdAsync(userGuid.ToString());
+        var user = FindUser(userGuid);
         return Ok(user);
     } */
 
-   /*  public async Task<IActionResult> YourMethodName()
+    /* private async Task<IActionResult> FindUser(Guid userGuid)
     {
-        return User;
+        var user = await _userManager.FindByIdAsync(userGuid.ToString());
+        return user;
     } */
 }

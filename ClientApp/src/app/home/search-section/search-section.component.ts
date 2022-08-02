@@ -5,4 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './search-section.component.html',
   styleUrls: ['./search-section.component.css']
 })
-export class SearchSectionComponent {}
+export class SearchSectionComponent {
+
+  
+}
