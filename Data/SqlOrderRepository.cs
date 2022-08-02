@@ -29,12 +29,15 @@ public class SqlOrderRepository : IOrderRepository
         return _context.Orders.ToList();
     }
 
+    public IEnumerable<Order> GetOrdersOfUser(Guid userGuid)
+    {
+        return _context.Orders.Where(order => order.Id == userGuid);
+    }
+
     public Order GetOrderById(Guid id)
     {
         return _context.Orders.FirstOrDefault(p => p.Id == id);
     }
-
-    public void UpdateOrder(Order order){}
 
     public void DeleteOrder(Order order){
         if(order is null) throw new System.ArgumentNullException(nameof(order));

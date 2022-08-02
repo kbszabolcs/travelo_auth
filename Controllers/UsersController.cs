@@ -27,6 +27,6 @@ public class UsersController : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<ApplicationUser> GetUserById(Guid userGuid){
         var user = _userManager.FindByIdAsync(userGuid.ToString());
-        return Ok(user);
+        
     }
 }
