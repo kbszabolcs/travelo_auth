@@ -23,6 +23,10 @@ import { MatTableModule } from '@angular/material/table';
 import { TripDetailsComponent } from './customer-section/trip-deatils/trip-details.component'  
 import { MatBadgeModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { CustomerBasketComponent } from './customer-section/customer-basket/customer-basket.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -48,6 +52,10 @@ import { CustomerBasketComponent } from './customer-section/customer-basket/cust
     MatButtonModule,
     MatIconModule,
     MatBadgeModule,
+    MatFormFieldModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatDatepickerModule,
     ReactiveFormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([

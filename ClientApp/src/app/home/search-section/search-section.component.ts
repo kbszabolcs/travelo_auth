@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-search-section',
@@ -7,5 +8,7 @@ import { Component } from '@angular/core';
 })
 export class SearchSectionComponent {
 
+  private checkInDate: Date;
+  private checkOutDate: Date;
   
 }
