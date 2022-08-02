@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'oidc-client';
 import { Observable } from 'rxjs';
 import { AuthorizeService, IUser } from 'src/api-authorization/authorize.service';
+import { Order } from 'src/app/data/models/Order';
 
 @Component({
   selector: 'app-customer-basket',
@@ -10,8 +11,9 @@ import { AuthorizeService, IUser } from 'src/api-authorization/authorize.service
 })
 export class CustomerBasketComponent implements OnInit {
 
-  public isAuthenticated: boolean;
-  public userGuId: string;
+  private isAuthenticated: boolean;
+  private userGuId: string;
+  private orders: Order[] = [];
 
   constructor(private authorizeService: AuthorizeService) { }
 
@@ -28,6 +30,10 @@ export class CustomerBasketComponent implements OnInit {
   }
 
   public getOrdersOfUser(guid: string) {
+    
+  }
+
+  public addOrder(order: Order) {
     
   }
 

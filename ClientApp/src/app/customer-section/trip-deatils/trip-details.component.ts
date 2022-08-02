@@ -4,7 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
+import { OrderCreateDTO } from 'src/app/data/models/OrderCreateDTO';
 import { Trip } from 'src/app/data/models/Trip';
+import { OrderService } from 'src/app/services/order-service';
 import { TripService } from 'src/app/services/trip-service';
 
 @Component({
@@ -21,7 +23,8 @@ export class TripDetailsComponent implements OnInit {
     private route: ActivatedRoute, 
     private tripService: TripService, 
     private domSanitizer: DomSanitizer,
-    private authService: AuthorizeService) { }
+    private authService: AuthorizeService,
+    private orderService: OrderService) { }
 
   ngOnInit() {
     var tripId = this.route.snapshot.params['id'];
@@ -35,7 +38,20 @@ export class TripDetailsComponent implements OnInit {
   }
 
   private onReservation(){
-    
+    this.authService.getUserGuid().then(
+      userGuid => {
+        let orderToPost = new OrderCreateDTO(
+          userGuid,
+          this.route.snapshot.params['id'],
+          new Date()
+        )
+        return this.orderService.PostOrder(orderToPost).subscribe(
+          result => {
+            console.log(result);
+          }
+        )
+      }
+    )
   }
 
   public getSantizeUrl(url : string) {

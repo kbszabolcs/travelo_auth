@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using travelo_auth.Models;
+using Microsoft.AspNetCore.Http;
 
 [Route("api/users")]
 [ApiController]
@@ -13,10 +14,12 @@ public class UsersController : ControllerBase
 {
 
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public UsersController(UserManager<ApplicationUser> userManager)
+    public UsersController(UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
     {
         _userManager = userManager;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     [HttpGet]
@@ -24,9 +27,14 @@ public class UsersController : ControllerBase
         return Ok(_userManager.Users);
     }
 
-    [HttpGet("{id}")]
+/*     [HttpGet("{userGuid}")]
     public ActionResult<ApplicationUser> GetUserById(Guid userGuid){
-        var user = _userManager.FindByIdAsync(userGuid.ToString());
-        
-    }
+        var user = await _userManager.FindByIdAsync(userGuid.ToString());
+        return Ok(user);
+    } */
+
+   /*  public async Task<IActionResult> YourMethodName()
+    {
+        return User;
+    } */
 }
