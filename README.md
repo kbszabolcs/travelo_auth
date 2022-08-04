@@ -44,7 +44,7 @@ Swagger documentation is available at [The swagger endpoint](https://localhost:5
 <br>
 
 
-### Technology
+### Keywords
 
 - Repository pattern
 - DTOs (Automapper)
