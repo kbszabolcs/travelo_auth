@@ -8,7 +8,16 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class SearchSectionComponent {
 
-  private checkInDate: Date;
-  private checkOutDate: Date;
+  private checkInDate: Date = null;
+  private checkOutDate: Date = null;
+
+  toppings = new FormControl('');
+  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+
+  private listSearchResult(){
+    console.log(this.checkInDate);
+    console.log(this.checkOutDate);
+    
+  }
   
 }
