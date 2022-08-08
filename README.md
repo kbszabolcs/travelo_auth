@@ -5,6 +5,12 @@ Travelo is a webshop SPA with .NET backend and Angular frontend, where customers
 
 ## How to run
 
+*Set connection string in appsettings.json:*
+```
+(LocalDb)\MSSQLLocalDB
+```
+<br>
+
 *Build, seed MSSQL database:*
 ```
 dotnet ef migrations add InitialMigration
@@ -38,7 +44,7 @@ Swagger documentation is available at [The swagger endpoint](https://localhost:5
 <br>
 
 
-### Technology
+### Keywords
 
 - Repository pattern
 - DTOs (Automapper)
