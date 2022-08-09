@@ -21,16 +21,19 @@ export class SearchSectionComponent {
 
   constructor(private recommendedService: TripService){}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.trips$ = this.recommendedService.GetRecommendedTrips();
+  }
   
   private listSearchResult(){
     console.log(this.checkInDate);
     console.log(this.checkOutDate);
+    console.log(this.tripLocations.value);
     
   }
 
   private checkInValidation = (d: Date | null): boolean => {
-    return d < this.checkOutDate;
+    return this.checkOutDate == null ? true : d < this.checkOutDate;
   };
   
   private checkOutValidation = (d: Date | null): boolean => {

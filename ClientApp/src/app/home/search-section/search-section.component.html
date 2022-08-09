@@ -6,8 +6,8 @@
             <div class="row w-100 searchTool">
                 <div class="col-lg-3 verticalDivider horizontalDivider">
                     <p>Where do You want to go?</p>
-                        <mat-select class="datePickerField" [formControl]="tripLocations" multiple>
-                          <mat-option *ngFor="let tripName of tripNames" [value]="tripName">{{tripName}}</mat-option>
+                        <mat-select class="datePickerField checkBoxColor" [formControl]="tripLocations" multiple>
+                          <mat-option *ngFor="let trip of trips$ | async" [value]="trip.name">{{trip.name}}</mat-option>
                         </mat-select>
                 </div>
                 <div class="col-lg-3 verticalDivider horizontalDivider">
