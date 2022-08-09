@@ -28,5 +28,13 @@ export class SearchSectionComponent {
     console.log(this.checkOutDate);
     
   }
+
+  private checkInValidation = (d: Date | null): boolean => {
+    return d < this.checkOutDate;
+  };
+  
+  private checkOutValidation = (d: Date | null): boolean => {
+    return this.checkInDate < d;
+  };
   
 }

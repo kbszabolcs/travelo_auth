@@ -14,14 +14,13 @@
                     <p>Check-In</p>
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
-                    <input class="datePickerField" [(ngModel)]="checkInDate" matInput [matDatepicker]="picker1">
+                    <input [matDatepickerFilter]="checkInValidation" class="datePickerField" [(ngModel)]="checkInDate" matInput [matDatepicker]="picker1">
                 </div>
                 <div class="col-lg-3">
                     <p>Check-Out</p>
-
                     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                     <mat-datepicker #picker2></mat-datepicker>
-                    <input class="datePickerField" [(ngModel)]="checkOutDate" matInput [matDatepicker]="picker2">
+                    <input [matDatepickerFilter]="checkOutValidation" class="datePickerField" [(ngModel)]="checkOutDate" matInput [matDatepicker]="picker2">
                 </div>
                 <div class="col-lg-3">
                     <button class="exploreButton" (click)="listSearchResult()">Explore Now</button>
