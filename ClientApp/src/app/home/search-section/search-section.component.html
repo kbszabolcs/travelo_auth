@@ -6,13 +6,12 @@
             <div class="row w-100 searchTool">
                 <div class="col-lg-3 verticalDivider horizontalDivider">
                     <p>Where do You want to go?</p>
-                        <mat-select class="datePickerField" [formControl]="toppings" multiple>
-                          <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+                        <mat-select class="datePickerField" [formControl]="tripLocations" multiple>
+                          <mat-option *ngFor="let tripName of tripNames" [value]="tripName">{{tripName}}</mat-option>
                         </mat-select>
                 </div>
                 <div class="col-lg-3 verticalDivider horizontalDivider">
                     <p>Check-In</p>
-
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                     <input class="datePickerField" [(ngModel)]="checkInDate" matInput [matDatepicker]="picker1">
