@@ -3,8 +3,8 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Trip } from 'src/app/data/models/Trip';
-import { TripCreateDTO } from 'src/app/data/models/TripCreateDTO';
-import { TripImageCreateDTO } from 'src/app/data/models/TripImageCreateDTO';
+import { TripCreateDTO } from 'src/app/data/DTO/TripCreateDTO'
+import { TripImageCreateDTO } from 'src/app/data/DTO/TripImageCreateDTO'
 import { TripService } from 'src/app/services/trip-service';
 
 @Component({

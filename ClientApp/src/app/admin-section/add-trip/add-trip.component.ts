@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TripCreateDTO } from 'src/app/data/models/TripCreateDTO';
-import { TripImageCreateDTO } from 'src/app/data/models/TripImageCreateDTO';
+import { TripCreateDTO } from 'src/app/data/DTO/TripCreateDTO'
+import { TripImageCreateDTO } from 'src/app/data/DTO/TripImageCreateDTO'
 import { TripService } from 'src/app/services/trip-service';
 
 @Component({

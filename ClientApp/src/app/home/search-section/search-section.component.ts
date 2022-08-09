@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Trip } from 'src/app/data/models/Trip';
+import { TripService } from 'src/app/services/trip-service';
 
 @Component({
   selector: 'app-search-section',
@@ -15,6 +16,12 @@ export class SearchSectionComponent {
 
   private tripLocations = new FormControl('');
   private tripNames: string[] = [];
+
+  private trips$: Observable<Trip[]>;
+
+  constructor(private recommendedService: TripService){}
+
+  ngOnInit() {}
   
   private listSearchResult(){
     console.log(this.checkInDate);

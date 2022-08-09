@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthorizeService } from 'src/api-authorization/authorize.service';
-import { OrderCreateDTO } from 'src/app/data/models/OrderCreateDTO';
+import { OrderCreateDTO } from 'src/app/data/DTO/OrderCreateDTO';
 import { Trip } from 'src/app/data/models/Trip';
 import { OrderService } from 'src/app/services/order-service';
 import { TripService } from 'src/app/services/trip-service';
